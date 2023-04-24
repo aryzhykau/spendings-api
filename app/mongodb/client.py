@@ -1,5 +1,5 @@
 from .database import MongoDB
-from config import MONGO_DB, MONGO_PORT, MONGO_HOST
+from app.config import MONGO_DB, MONGO_PORT, MONGO_HOST
 
 mongo = MongoDB(host=MONGO_HOST,
                 port=MONGO_PORT, database=MONGO_DB)

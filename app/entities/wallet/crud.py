@@ -1,4 +1,4 @@
-from mongodb.client import mongo, mongo_connection
+from app.mongodb.client import mongo, mongo_connection
 
 
 @mongo_connection

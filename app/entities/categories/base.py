@@ -1,0 +1,1 @@
+base_categories = ['food','bills',"entertainment"]

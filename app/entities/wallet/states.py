@@ -6,7 +6,7 @@ class WalletState(StatesGroup):
     add_wallet = State()
     remove_wallet = State()
     confirmation = State()
-    get_wallets = State()
+    choose_wallets = State()
     get_single_wallet = State()
 
 

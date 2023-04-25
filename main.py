@@ -1,6 +1,6 @@
 from aiogram import executor
-from bot import dp
-from settings import message_handlers #callback_handlers
+from app.bot import dp
+from app.settings import message_handlers #callback_handlers
 
 
 for handler in message_handlers:

@@ -1,3 +1,8 @@
+strenum
 pymongo
 aiogram
 matplotlib
+emoji_translate
+regex
+spacy
+nltk

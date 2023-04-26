@@ -1,6 +1,6 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from .callbacks import wallet_cb
-from . import callback_actions as actions
+from .callback_data import WalletActions, WalletProcesses
 from app.entities.main_menu.utils.callback_actions import *
 
 
@@ -9,32 +9,32 @@ wallet_create_button = InlineKeyboardButton(
     text='Добавить кошелек',
     callback_data=wallet_cb.new(
         name='',
-        next_action='',
-        action=actions.wallet_create
+        process=WalletProcesses.Creating,
+        action=WalletActions.Create
     )
 )
 wallet_delete_button = InlineKeyboardButton(
     text='Удалить кошелек',
     callback_data=wallet_cb.new(
         name='',
-        next_action=actions.wallet_delete_choose,
-        action=actions.wallet_get_all
+        process=WalletProcesses.Deleting,
+        action=WalletActions.GetAll
     )
 )
 wallet_get_single_button = InlineKeyboardButton(
     text='Получить информацию о кошельке',
     callback_data=wallet_cb.new(
         name='',
-        next_action=actions.wallet_get_single,
-        action=actions.wallet_get_all
+        process=WalletProcesses.Info,
+        action=WalletActions.GetAll
     )
 )
 wallet_go_back_button = InlineKeyboardButton(
     text='Назад',
     callback_data=wallet_cb.new(
         name='',
-        next_action='',
-        action=actions.wallet_main_go_back
+        process=WalletProcesses.Base,
+        action=WalletActions.GoBack
     )
 )
 
@@ -44,14 +44,14 @@ wallet_menu_kb.add(wallet_create_button, wallet_delete_button, wallet_get_single
 
 #1
 class WalletListKeyboardMarkup(InlineKeyboardMarkup):
-    def __init__(self, wallets: list, action: str):
+    def __init__(self, wallets: list, process: str, action: str):
         super().__init__()
         for wallet in wallets:
             self.add(InlineKeyboardButton(
-                text=wallet,
-                callback_data=wallet_cb.new(name=wallet, next_action='', action=action)
+                text=wallet['name'],
+                callback_data=wallet_cb.new(name=str(wallet['_id']), process=process, action=action)
             ))
         self.add(InlineKeyboardButton(
-            text = "Назад",
-            callback_data=wallet_cb.new(name='', next_action='', action=actions.go_to_wallet_menu)
+            text="Назад",
+            callback_data=wallet_cb.new(name='', process=process, action=WalletActions.GoBack)
         ))

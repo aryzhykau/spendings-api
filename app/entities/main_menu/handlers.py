@@ -5,11 +5,15 @@ from app.entities.categories.base import *
 from .crud import *
 from .states import *
 from .utils.keyboards import *
+import logging
+import datetime
 
 
 @dp.message_handler(commands='start')
 async def process_start(message: Message, state: FSMContext):
+    logging.info(f"Recieved command start from: {message.from_user.id} {message.from_user.full_name} {datetime.datetime.now()}")
     if check_user(message.from_user.id):
+        await state.finish()
         await MainMenuState.idle.set()
         await bot.send_message(
             chat_id=message.from_user.id,
